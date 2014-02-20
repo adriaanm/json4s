@@ -231,7 +231,7 @@ trait Formats { self: Formats =>
         (components
           filter (_.containsHint(clazz))
           map (th => (th.hintFor(clazz), th.classFor(th.hintFor(clazz)).getOrElse(sys.error("hintFor/classFor not invertible for " + th))))
-          sort ((x, y) => (delta(x._2, clazz) - delta(y._2, clazz)) < 0)).head._1
+          sortWith ((x, y) => (delta(x._2, clazz) - delta(y._2, clazz)) < 0)).head._1
       }
 
       def classFor(hint: String): Option[Class[_]] = {
